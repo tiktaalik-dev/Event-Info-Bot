@@ -1,0 +1,49 @@
+#
+# Event Info Bot - Bot service software for Telegram and Twitter to provide user with
+#                  reminders of event date and info on request
+#
+# Copyright (C) 2019 Tiktaalik (Rodrigo Gambra-Middleton)
+#                    Address your enquiries to: info@tiktaalik.dev
+#
+#     This program is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+
+# NOTE: Remember to rename this file! Google App Engine expects that this file to be named cron.yaml
+
+cron:
+- description: "Check mentions and reply"
+  url: /twitter/actions/[insert here your Twitter Access Token]/reply-mentions
+  schedule: every 10 minutes
+  timezone: Australia/Brisbane
+
+- description: "Hourly reminder (hours)"
+  url: /twitter/actions/[insert here your Twitter Access Token]/hourly-reminder
+  schedule: every 60 minutes
+  timezone: Australia/Brisbane
+
+- description: "Daily reminder (summary)"
+  url: /twitter/actions/[insert here your Twitter Access Token]/daily-summary-reminder
+  schedule: every day 12:00
+  timezone: Australia/Brisbane
+
+- description: "Daily reminder (days)"
+  url: /twitter/actions/[insert here your Twitter Access Token]/daily-days-reminder
+  schedule: every day 00:01
+  timezone: Australia/Brisbane
+
+- description: "Daily reminder (months)"
+  url: /twitter/actions/[insert here your Twitter Access Token]/daily-months-reminder
+  schedule: every day 17:00
+  timezone: Australia/Brisbane
