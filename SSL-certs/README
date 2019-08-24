@@ -1,0 +1,35 @@
+#
+# Event Info Bot - Bot service software for Telegram and Twitter to provide user with
+#                  reminders of event date and info on request
+#
+# Copyright (C) 2019 Tiktaalik (Rodrigo Gambra-Middleton)
+#                    Address your enquiries to: info@tiktaalik.dev
+#
+#     This program is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+Instructions
+------------
+
+Store your SSL server certificates and private keys in this folder. These are required to enable webhooks in the
+Telegram bot, so if you are only going to use the Twitter bot then you can skip this step. I recommend that you use the
+same file names already set in /bot/app/config.py so that you don't need to change those setting there.
+
+Remember that both the certificates and keys should be in PEM format! At least that's the format required to deploy them
+to Google App Engine and for setting a webhook with Telegram servers. If your server uses Apache or other web server
+check its documentation for the best file option.
+
+Also remember to check the Telegram API documentation if you intend to use self-signed certificates. There you will
+find a handy guide that will help you avoid common problems when implementing this kind of certificates. You can find
+that guide at https://core.telegram.org/bots/webhooks
