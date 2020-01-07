@@ -68,14 +68,16 @@ def years_left():
     :return: Full years left to reach the event date
     :rtype: int
     """
-    # Calculate the raw difference between year of leave and current year
-    now = get_now()
-    raw_difference = leave_date.year - now.year
-
-    # But if the difference is not exactly a full year, the raw difference will be off for one year
-    # So, check and then discount it, if appropriate
-    if year_fraction_left() != 0:
-        raw_difference -= 1
+    # # Calculate the raw difference between year of leave and current year
+    # now = get_now()
+    # raw_difference = leave_date.year - now.year
+    # months_difference = months_left()
+    #
+    # # But if the difference is not exactly a full year, the raw difference will be off for one year
+    # # So, check and then discount it, if appropriate
+    # if year_fraction_left() != 0:
+    #     raw_difference -= 1
+    raw_difference = months_left() // 12
 
     return raw_difference
 
@@ -103,7 +105,11 @@ def months_left():
     :return: Total full months between the event month and current month
     :rtype: int
     """
-    return year_fraction_left() + years_left() * 12
+
+    # Get days left
+    raw_days_left = days_left()
+    # return year_fraction_left() + years_left() * 12
+    return (raw_days_left // 365) * 12 + year_fraction_left()
 
 
 def days_left(relative=False):
@@ -130,7 +136,7 @@ def days_left(relative=False):
         # Get the number of days that this month have in total
         days_this_month = calendar.monthlen(year=now.year, month=now.month)
 
-        # Calculate the days difference by adding the day of the event with the amount of days eft till the end of
+        # Calculate the days difference by adding the day of the event with the amount of days left till the end of
         # this month
         delta = (leave_date.day + (days_this_month - today)) % days_this_month
     else:
