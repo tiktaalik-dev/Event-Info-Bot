@@ -147,7 +147,7 @@ def check_mentions(api, since_id='1'):
     new_since_id = since_id
 
     # Retrieve list of tweets from server and iterate over its elements to collect ID numbers
-    for tweet in tweepy.Cursor(api.mentions_timeline, since_id=since_id).items():
+    for tweet in tweepy.Cursor(api.mentions_timeline, since_id=since_id, tweet_mode='extended').items():
         # First check that the tweets were not posted by your bot itself. If they are, skip them
         if (tweet.user.screen_name is not config.twitter_bot_name) and (tweet.id > since_id):
             tweet_ids.append(tweet.id)
@@ -208,10 +208,13 @@ def reply_tweet(api, tweet, keywords=lang_commands):
 
     # Log debugging information
     logger.debug(msg='\n\ntweet.id is: {0}'.format(str(tweet.id)))
-    logger.debug(msg='\n\ntweet.text is: {0}'.format(str(tweet.text)))
+    logger.debug(msg='\n\ntweet.text is: {0}'.format(str(tweet.full_text)))
 
     # Split the tweet message into a list of words
-    tweet_words = tweet.text.lower().split()
+    raw_tweet_words = tweet.full_text.lower().split()
+
+    # Splitted words may contain dots. Remove them to ensure commands are recognised!
+    tweet_words = [word.replace('.', '') for word in raw_tweet_words]
 
     # Extract a list of all values for the elements in the 'keywords' dictionary
     keywords_values = keywords.values()
