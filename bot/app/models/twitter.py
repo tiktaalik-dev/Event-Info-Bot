@@ -227,7 +227,7 @@ class TwitterCursor(object):
         db_data = self.db_client.get(key=self.entity_key)
 
         # Log debugging information
-        logger.debugging(msg='Retrieved cursor data from db: {0}'.format(repr(db_data)))
+        logger.debug(msg='Retrieved cursor data from db: {0}'.format(repr(db_data)))
 
         # Return cursor data
         return db_data
