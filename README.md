@@ -53,6 +53,9 @@ in case your language is not yet available.
 
 ## Release History
 
+* 0.9.3 Bug fix
+* 0.9.2 Bug fix
+* 0.9.1 Bug fix
 * 0.9.0
     * The first proper release
     * Bot features Telegram messenger and Twitter platform functionality

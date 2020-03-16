@@ -98,10 +98,11 @@ def months_left():
     :rtype: int
     """
 
-    # Get days left
-    raw_days_left = days_left()
+    # Get years left
+    now = get_now()
+    raw_years_left = leave_date.year - now.year
 
-    return (raw_days_left // 365) * 12 + year_fraction_left()
+    return raw_years_left * 12 + year_fraction_left()
 
 
 def days_left(relative=False):
