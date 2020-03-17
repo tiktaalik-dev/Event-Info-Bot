@@ -187,15 +187,23 @@ def get_date(data_request):
     # ### Beginning of internal functions ###
     def format_num(number):
         """
-        Function that format numbers to use dots as thousand-separator characters instead of colons. This is useful
-        for non-English languages, such as Spanish.
+        Function that format numbers to use the appropriate character for grouping thousands and separating decimal
+        digits, according to each locale. This is useful for non-English languages, such as Spanish, which don't follow
+        the same conventions than English. Hence, as Python calculates arithmetic operations using English conventions,
+        other languages require that the output string is modified.
 
-        :param number: Number string that requires formatting it as a non-English numeral
+        :param number: Number string that requires formatting accordingly to the locale
         :type number: str or int
-        :return: A numeral formatted according to the rules of non-English languages
+        :return: A numeral formatted according to the rules of each locale
         :rtype: str
         """
-        return '{:,}'.format(number).replace(',', '.')
+
+        # Check if current locale is an English variation
+        if config.bot_locale[0:1] == 'en':
+            return '{:,}'.format(number)
+        else:
+            thousands_sep = lang['thousands_separator']
+            return '{:,}'.format(number).replace(',', thousands_sep)
 
     def format_seconds():
         """
@@ -278,7 +286,7 @@ def get_date(data_request):
         # If the number is greater than 1, return plural noun by default
         return lang['x_days'].format(days), verb_suffix
 
-    def format_months(fraction=False):
+    def format_months(fraction=False, edge_month=False):
         """
         Ask the months_left() function for the number of months left to the event and format its results as a
         human-readable string.
@@ -286,13 +294,22 @@ def get_date(data_request):
         :param fraction: Indicates whether the result asked should only return months as a fraction of a year or in
         total. This parameter is necessary when displaying a 'summary' string that list years, months and days
         :type fraction: bool
+        :param edge_month: Whether the result must be subtracted one month or not
+        :type edge_month: bool
         :return: Human-readable information for the days left to the event
         :rtype: str
         """
 
-        # Get the number of months left, depending on whether the request is for total months or the fraction of a year
+        # Get the number of months left, depending on whether the request is for total months or the fraction of a year.
+        # Adjust the result for edge month if required
         if fraction:
-            months = format_num(year_fraction_left())
+            if edge_month:
+                input_data = 11
+            else:
+                input_data = year_fraction_left()
+
+            months = format_num(input_data)
+
         else:
             months = format_num(months_left())
 
@@ -303,17 +320,22 @@ def get_date(data_request):
         # If the number is greater than 1, return plural noun by default
         return lang['x_months'].format(months), verb_suffix
 
-    def format_years():
+    def format_years(edge_year=False):
         """
         Ask the years_left() function for the number of years left to the event and format its results as a
         human-readable string.
 
+        :param edge_year: Whether the result must be subtracted one year or not
+        :type edge_year: bool
         :return: Human-readable information for the years left to the event
         :rtype: str
         """
 
-        # Get the number of years left
-        years = format_num(years_left())
+        # Get the number of years left. Adjust for edge year if required
+        if edge_year:
+            years = format_num(years_left() - 1)
+        else:
+            years = format_num(years_left())
 
         # Check whether the result is 1, and then return the appropriate string
         if years == '1':
@@ -331,15 +353,25 @@ def get_date(data_request):
         :rtype: str
         """
 
-        # Get the number of years, months and days left
-        ymd = {'years': format_years()[0], 'months': format_months(fraction=True)[0],
-               'days': format_days(relative=True)[0]}
-
         # Get the number of seconds left and use it to detect if the event date and time has already passed before
         # returning any summary string
         delta = get_delta()
         if delta.seconds < 1:
             return None
+
+        # Check if event month and current month are the same one, and whether the current day is greater than the event
+        # If that happens, we are on the edge between years and the output must be adjusted by subtracting one month
+        # and one year. This will ensure displaying a human-friendly string
+        now = get_now()
+        if (leave_date.month == now.month) and (leave_date.day < now.day):
+            years = format_years(edge_year=True)[0]
+            months = format_months(fraction=True, edge_month=True)[0]
+        else:
+            years = format_years()[0]
+            months = format_months(fraction=True)[0]
+
+        # Get the number of years, months and days left
+        ymd = {'years': years, 'months': months, 'days': format_days(relative=True)[0]}
 
         # If the number of seconds is greater than 1, return the default string
         return lang['ymd'].format(ymd['years'], ymd['months'], ymd['days']), verb_suffix

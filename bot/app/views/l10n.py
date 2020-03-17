@@ -35,6 +35,7 @@ import unicodedata
 locales = {
     'en-AU': {
         'calculations': {
+            'thousands_separator': ',',
             'base_string': '¡Only{0} {1} left!',
             'base_string_verb_suffix': '',
             'base_string_verb_suffix_null': '',
@@ -168,6 +169,7 @@ locales = {
     },
     'es-CL': {
         'calculations': {
+            'thousands_separator': '.',
             'base_string': '¡Queda{0} {1}!',
             'base_string_verb_suffix': 'n',
             'base_string_verb_suffix_null': '',
