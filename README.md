@@ -6,6 +6,7 @@ calculating how many years, months, days, hours, minutes or seconds are left fro
 [![Python Version][python-image]][python-url]
 [![GAE compatibility][gae-image]][gae-url]
 [![Download from][bot-downloads-image]][bot-downloads-url]
+[![Download from][bot-github-downloads-image]][bot-github-downloads-url]
 
 Use this application to manage Telegram and Twitter accounts that inform your users about the date when an event is due. 
 
@@ -111,8 +112,10 @@ See [https://dbader.org/blog/write-a-great-readme-for-your-github-project]
 <!-- Markdown link & img dfn's -->
 [python-image]: https://img.shields.io/badge/python-3.7-blue
 [python-url]: https://www.python.org/downloads/release/python-370/
-[gae-image]: https://img.shields.io/badge/Google%20App%20Engine-standard%20Py%203-brightgreen
+[gae-image]: https://img.shields.io/badge/Google%20App%20Engine-Python%203%20(standard)-brightgreen
 [gae-url]: https://cloud.google.com/appengine/docs/standard/python3/runtime
 [bot-downloads-image]: https://img.shields.io/badge/Download%20from-BitBucket-orange
+[bot-github-downloads-image]: https://img.shields.io/badge/Download%20from-GitHub-orange
 [bot-downloads-url]: https://bitbucket.org/rgambra/event-info-bot/downloads/?tab=downloads
+[bot-github-downloads-url]: https://github.com/doctortoffu/Event-Info-Bot
 [wiki]: https://bitbucket.org/rgambra/event-info-bot/wiki/
