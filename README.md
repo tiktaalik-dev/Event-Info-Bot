@@ -54,6 +54,7 @@ in case your language is not yet available.
 
 ## Release History
 
+* 0.9.5 Updated README file
 * 0.9.4 Bug fix
 * 0.9.3 Bug fix
 * 0.9.2 Bug fix
