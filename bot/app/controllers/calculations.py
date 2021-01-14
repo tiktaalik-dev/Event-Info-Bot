@@ -102,6 +102,12 @@ def months_left():
     now = get_now()
     raw_years_left = leave_date.year - now.year
 
+    # Check whether the amount of years left are full years or not. If not, discount one or the amount of months left
+    # reported will be off by 12 months
+    # year_fraction = year_fraction_left()
+    # if year_fraction != 0:
+    #     raw_years_left -= 1
+
     return raw_years_left * 12 + year_fraction_left()
 
 
