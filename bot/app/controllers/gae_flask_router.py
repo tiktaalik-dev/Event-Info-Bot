@@ -438,3 +438,47 @@ if config.serve_twitter:
         tw_bot.reminder_tweet(api=api, command=lang_commands['months'])
 
         return lang_site_msg['job_done']
+
+
+    @event_bot.route('/twitter/actions/{0}/minutes-reminder'.format(secrets.twitter_access_token), methods=['GET'])
+    def final_minutes():
+        """
+        This route is specific for the Twitter bot and is meant to tweet a reminder in the final minutes (over the last
+        hour), just before the event time is met. It only accepts HTTP GET requests. Please note that as Twitter doesn't
+        provide webhooks for users of their Standard API, this bot is configured to manually execute
+        this actions when triggering this route with an HTTP GET request. Therefore, you can automatise this process by
+        simply creating a CRON job in your Linux/Unix server (haven't tested this program on any Windows server,
+        sorry about that) that visits this URL at a certain minute.
+
+        :return: An informative statement notifying you that the method finished successfully
+        :rtype: str
+        """
+
+        tw_bot.reminder_tweet(api=api, command=lang_commands['minutes'])
+
+        return lang_site_msg['job_done']
+
+
+    @event_bot.route('/twitter/actions/{0}/seconds-reminder'.format(secrets.twitter_access_token), methods=['GET'])
+    def final_seconds():
+        """
+        This route is specific for the Twitter bot and is meant to tweet a reminder in the final seconds (over the last
+        minute), just before the event time is met. It only accepts HTTP GET requests. Please note that as Twitter
+        doesn't provide webhooks for users of their Standard API, this bot is configured to manually execute
+        this actions when triggering this route with an HTTP GET request. Therefore, you can automatise this process by
+        simply creating a CRON job in your Linux/Unix server (haven't tested this program on any Windows server,
+        sorry about that) that visits this URL at a certain minute.
+
+        :return: An informative statement notifying you that the method finished successfully
+        :rtype: str
+        """
+
+        # Create a timer for the final 59 seconds
+        import time
+
+        for second in range(60):
+            tw_bot.reminder_tweet(api=api, command=lang_commands['seconds'])
+            time.sleep(1)
+
+        return lang_site_msg['job_done']
+

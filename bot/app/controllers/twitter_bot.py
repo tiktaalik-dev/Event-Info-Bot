@@ -317,6 +317,8 @@ def reminder_tweet(api, command):
     # Get the localised base strings for the reminder text for all possible commands and store them
     reminder_strings = {
         lang_commands['hours']: lang_twitter['hourly_reminder'],
+        lang_commands['minutes']: lang_twitter['minutes_reminder'],
+        lang_commands['seconds']: lang_twitter['seconds_reminder'],
         lang_commands['summary']: lang_twitter['daily_summary_reminder'],
         lang_commands['days']: lang_twitter['daily_days_reminder'],
         lang_commands['months']: lang_twitter['daily_months_reminder']

@@ -158,6 +158,10 @@ locales = {
                              '\nyears, months, days, hours, minutes, seconds ➡️ Self-explanatory.',
             'hourly_reminder': "Hi there, just a reminder that there's one hour less to go right now till the event "
                                'date comes around 😉. To be accurate: {0}',
+            'minutes_reminder': "Hi there, just a reminder that we're on the final minutes before the event date comes "
+                                'around 😉. To be accurate: {0}',
+            'seconds_reminder': "Hi there, just a reminder that we're on the final seconds before the event date comes "
+                                'around 😉. To be accurate: {0}',
             'daily_summary_reminder': 'Hi there, just a reminder that another day has passed, so the event date is '
                                       'getting closer 😉. To be accurate: {0}',
             'daily_days_reminder': 'Hi there, just a reminder that as another day has passed, you add another mark in '
@@ -296,6 +300,10 @@ locales = {
                              '\naños, meses, días, horas, minutos, segundos ➡️ Lo que dice c/u.',
             'hourly_reminder': '¡Hola!, solo un recordatorio de que ya falta una hora menos para que llegue el día '
                                'del evento 😉. Para ser exacto: {0}',
+            'minutes_reminder': '¡Hola!, solo un recordatorio de que estamos en los últimos minutos para que llegue el '
+                                'día del evento 😉. Para ser exacto: {0}',
+            'seconds_reminder': '¡Hola!, solo un recordatorio de que estamos en los últimos segundos para que llegue '
+                                'el día del evento 😉. Para ser exacto: {0}',
             'daily_summary_reminder': '¡Hola!, solo un recordatorio de que acaba de empezar un nuevo día, así es que '
                                       'el evento está un poco más cerca 😉. Para ser exacto: {0}',
             'daily_days_reminder': '¡Hola!, solo un recordatorio de que se acaba de ir otro día, así es que ya puedes '

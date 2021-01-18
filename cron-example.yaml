@@ -47,3 +47,103 @@ cron:
   url: /twitter/actions/[insert here your Twitter Access Token]/daily-months-reminder
   schedule: every day 17:00
   timezone: Australia/Brisbane
+
+#- description: "Final 55 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:05
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 50 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:10
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 45 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:15
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 40 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:20
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 35 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:25
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 30 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:30
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 25 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:35
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 20 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:40
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 15 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:45
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 10 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:50
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 9 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:51
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 8 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:52
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 7 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:53
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 6 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:54
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 5 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:55
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 4 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:56
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 3 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:57
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 2 minutes reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:58
+#  timezone: Australia/Brisbane
+#
+#- description: "Final 1 minute reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/minutes-reminder
+#  schedule: 31 of december 23:59
+#  timezone: Australia/Brisbane
+#
+#- description: "Final seconds reminder"
+#  url: /twitter/actions/[insert here your Twitter Access Token]/seconds-reminder
+#  schedule: 31 of december 23:59
+#  timezone: Australia/Brisbane
