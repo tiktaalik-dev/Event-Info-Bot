@@ -24,6 +24,7 @@
     event date, and then formats the result as a human-readable string that is returned to the calling process.
 """
 
+import pytz
 import calendar
 from bot.app.controllers.logger import *
 import bot.app.config as config
@@ -48,7 +49,15 @@ def get_now():
     :return: Current time and date
     :rtype: datetime
     """
-    return datetime.now()
+
+    # Get current time from server
+    server_localtime = datetime.now()
+
+    # Localise it according to the time zone set for this server
+    localised_now = config.server_timezone.localize(dt=server_localtime)
+
+    # Return timezone-aware datetime object
+    return localised_now
 
 
 def get_delta():

@@ -31,6 +31,7 @@ illogical).
 
 
 import os
+import pytz
 import urllib.request
 import bot.app.secrets as secrets
 from datetime import datetime
@@ -47,9 +48,23 @@ twitter_interval = 10  # The interval (in minutes) between connections to the Tw
 # Set the 'debug' flag for Google App Engine debugger (normally it should be set to False)
 gae_debugger = False
 
-# Set here the date of the event you want to provide a countdown to.
+# Set the time zone where your server is located, This is important!
+# Check available timezones with command pytz.country_timezones('us'). Replace with the proper country code
+# Then fill in the desired time zone into the following command argument
+# Please be aware that Google App Engine sets the server clock to use the UTC (+0) time zone, so you should use
+# Europe/London in that case
+server_timezone = pytz.timezone('Europe/London')
+
+# Set here the date of the event you want to provide a countdown to. Use the event's local time!
 # Parameters are: (year, month, day, hour, minute, second)
-event_date = datetime(2022, 3, 13, 12, 0, 0)
+localtime_event_date = datetime(2022, 3, 13, 12, 0, 0)
+
+# Then set the correct time zone for your event. Follow the same steps you did for the server timezone
+event_timezone = pytz.timezone('America/New_York')
+
+# Now we localise the event date and time to make sure your bot is aware of the time zones when performing calculations
+# Do not alter the following command!
+event_date = event_timezone.localize(dt=localtime_event_date)
 
 # Set here custom properties of your bot server
 bot_locale = 'es-CL'  # Check the available locale options in the file bot/app/l10n.py
