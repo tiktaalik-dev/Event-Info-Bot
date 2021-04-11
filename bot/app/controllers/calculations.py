@@ -38,8 +38,8 @@ logger = logging.getLogger(__name__)
 lang = locales[config.bot_locale]['calculations']
 lang_commands = lang['commands']
 
-# Set event date
-leave_date = config.event_date
+# Set UTC timezone object
+utc = pytz.utc
 
 
 def get_now():
@@ -50,14 +50,17 @@ def get_now():
     :rtype: datetime
     """
 
-    # Get current time from server
-    server_localtime = datetime.now()
+    # Get current time from server (it's local tie with no timezone!)
+    server_local_time = datetime.now()
 
     # Localise it according to the time zone set for this server
-    localised_now = config.server_timezone.localize(dt=server_localtime)
+    localised_now = config.server_timezone.localize(dt=server_local_time)
 
-    # Return timezone-aware datetime object
-    return localised_now
+    # Convert localised_now to the UTC timezone to ease calculations
+    utc_now = localised_now.astimezone(utc)
+
+    # Return current server time set on the UTC timezone
+    return utc_now
 
 
 def get_delta():
@@ -67,7 +70,11 @@ def get_delta():
     :return: Time difference between now and the event date
     :rtype: datetime.timedelta
     """
-    return leave_date - get_now()
+
+    # Localise the event date and time to make sure the bot is aware of the time zones when performing calculations
+    event_date = config.event_timezone.localize(dt=config.localtime_event_date)
+
+    return event_date - get_now()
 
 
 def years_left():
@@ -94,7 +101,7 @@ def year_fraction_left():
     :rtype: int
     """
     now = get_now()
-    return (leave_date.month - now.month) % 12
+    return (event_date.month - now.month) % 12
 
 
 def months_left():
@@ -109,7 +116,7 @@ def months_left():
 
     # Get years left
     now = get_now()
-    raw_years_left = leave_date.year - now.year
+    raw_years_left = event_date.year - now.year
 
     # Check whether the amount of years left are full years or not. If not, discount one or the amount of months left
     # reported will be off by 12 months
@@ -146,7 +153,7 @@ def days_left(relative=False):
 
         # Calculate the days difference by adding the day of the event with the amount of days left till the end of
         # this month
-        delta = (leave_date.day + (days_this_month - today)) % days_this_month
+        delta = (event_date.day + (days_this_month - today)) % days_this_month
     else:
         # If the user only requested the total number of days, calculate it including years and months
         delta = get_delta().days
@@ -194,8 +201,20 @@ def get_date(data_request):
     :return: The calculated time and/or date difference information
     :rtype: str
     """
-    # Get the default string that will be used to format the reply
-    base_str = lang['base_string']
+
+    # Build a timestamp
+    timestamp = get_now()
+
+    # Localise timestamp to the event's timezone
+    localised_timestamp = timestamp.astimezone(config.event_timezone)
+    # if timestamp.minute < 10:
+    #     timestamp_mins = '0{0}'.format(timestamp.minute)
+    # else:
+    #     timestamp_mins = timestamp.minute
+
+    # Get the default strings that will be used to format the reply
+    timestamp_prefix = localised_timestamp.strftime('%H:%M hr ➡ ')
+    base_str = '{0}{1}'.format(timestamp_prefix, lang['base_string'])
     verb_suffix = lang['base_string_verb_suffix']
     null_suffix = lang['base_string_verb_suffix_null']
 
@@ -378,7 +397,7 @@ def get_date(data_request):
         # If that happens, we are on the edge between years and the output must be adjusted by subtracting one month
         # and one year. This will ensure displaying a human-friendly string
         now = get_now()
-        if (leave_date.month == now.month) and (leave_date.day < now.day):
+        if (event_date.month == now.month) and (event_date.day < now.day):
             years = format_years(edge_year=True)[0]
             months = format_months(fraction=True, edge_month=True)[0]
         else:
@@ -408,8 +427,8 @@ def get_date(data_request):
 
         # Return the date appropriately formatted
         return lang['format_date_base_string'].format(
-            leave_date.day, month_names[str(leave_date.month)], leave_date.year, leave_date.hour, leave_date.minute,
-            leave_date.second)
+            event_date.day, month_names[str(event_date.month)], event_date.year, event_date.hour, event_date.minute,
+            event_date.second)
 
     # ### End of internal functions ###
 

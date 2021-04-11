@@ -60,11 +60,7 @@ server_timezone = pytz.timezone('Europe/London')
 localtime_event_date = datetime(2022, 3, 13, 12, 0, 0)
 
 # Then set the correct time zone for your event. Follow the same steps you did for the server timezone
-event_timezone = pytz.timezone('America/New_York')
-
-# Now we localise the event date and time to make sure your bot is aware of the time zones when performing calculations
-# Do not alter the following command!
-event_date = event_timezone.localize(dt=localtime_event_date)
+event_timezone = pytz.timezone('America/Santiago')
 
 # Set here custom properties of your bot server
 bot_locale = 'es-CL'  # Check the available locale options in the file bot/app/l10n.py
