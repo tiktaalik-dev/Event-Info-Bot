@@ -27,3 +27,4 @@ simplejson==3.16.0
 asn1crypto==0.24.0
 google-cloud-datastore==1.8.0
 google-python-cloud-debugger==2.11
+pytz~=2019.2

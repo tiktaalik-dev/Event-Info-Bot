@@ -63,6 +63,20 @@ def get_now():
     return utc_now
 
 
+def get_timezone_date():
+    """
+    Localise the event date and time by adjusting it to account for the timezone differences between the location where
+    the event will be held and where the sever is placed.
+
+    :return: Date time object including a timezone mark
+    :rtype: datetime
+    """
+    # Localise the event date and time to make sure the bot is aware of the time zones when performing calculations
+    event_date = config.event_timezone.localize(dt=config.localtime_event_date)
+
+    return event_date
+
+
 def get_delta():
     """
     Calculate the date and time difference between the date set for the event and the current time and date.
@@ -71,8 +85,8 @@ def get_delta():
     :rtype: datetime.timedelta
     """
 
-    # Localise the event date and time to make sure the bot is aware of the time zones when performing calculations
-    event_date = config.event_timezone.localize(dt=config.localtime_event_date)
+    # Get the event date (corrected by its timezone)
+    event_date = get_timezone_date()
 
     return event_date - get_now()
 
@@ -100,7 +114,13 @@ def year_fraction_left():
     :return: Number of full months between event month and current month
     :rtype: int
     """
+
+    # Get current time
     now = get_now()
+
+    # Get the event date (corrected by its timezone)
+    event_date = get_timezone_date()
+
     return (event_date.month - now.month) % 12
 
 
@@ -116,6 +136,11 @@ def months_left():
 
     # Get years left
     now = get_now()
+
+    # Get the event date (corrected by its timezone)
+    event_date = get_timezone_date()
+
+    # Calculate how many years are left
     raw_years_left = event_date.year - now.year
 
     # Check whether the amount of years left are full years or not. If not, discount one or the amount of months left
@@ -147,6 +172,9 @@ def days_left(relative=False):
         # Get current day from the system date
         now = get_now()
         today = now.day
+
+        # Get the event date (corrected by its timezone)
+        event_date = get_timezone_date()
 
         # Get the number of days that this month have in total
         days_this_month = calendar.monthlen(year=now.year, month=now.month)
@@ -397,6 +425,10 @@ def get_date(data_request):
         # If that happens, we are on the edge between years and the output must be adjusted by subtracting one month
         # and one year. This will ensure displaying a human-friendly string
         now = get_now()
+
+        # Get the event date (corrected by its timezone)
+        event_date = get_timezone_date()
+
         if (event_date.month == now.month) and (event_date.day < now.day):
             years = format_years(edge_year=True)[0]
             months = format_months(fraction=True, edge_month=True)[0]
@@ -417,6 +449,9 @@ def get_date(data_request):
         :return: Human-readable information for the event date
         :rtype: str
         """
+
+        # Get the event date (corrected by its timezone)
+        event_date = get_timezone_date()
 
         # Get the localised name for all months and assign each one to its calendar number
         month_locales = lang['month_names']
