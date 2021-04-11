@@ -141,7 +141,11 @@ def months_left():
     event_date = get_timezone_date()
 
     # Calculate how many years are left
-    raw_years_left = event_date.year - now.year
+    years_left = event_date.year - now.year
+
+    # Correct in case it's less than one year left
+    if years_left == 1 and event_date.month < now.month:
+        years_left = 0
 
     # Check whether the amount of years left are full years or not. If not, discount one or the amount of months left
     # reported will be off by 12 months
@@ -149,7 +153,7 @@ def months_left():
     # if year_fraction != 0:
     #     raw_years_left -= 1
 
-    return raw_years_left * 12 + year_fraction_left()
+    return years_left * 12 + year_fraction_left()
 
 
 def days_left(relative=False):
