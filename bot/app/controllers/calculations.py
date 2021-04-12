@@ -145,7 +145,7 @@ def months_left():
 
     # Correct in case it's less than one year left
     if years_left == 1 and event_date.month < now.month:
-        years_left = 0
+        years_left -= 1
 
     # Check whether the amount of years left are full years or not. If not, discount one or the amount of months left
     # reported will be off by 12 months
