@@ -34,6 +34,8 @@ import bot.app.secrets as secrets
 import bot.app.config as config
 from bot.app.views.l10n import locales
 
+# Set version
+__version__ = (1, 0, 0)
 
 # Start logger
 logger = logging.getLogger(__name__)

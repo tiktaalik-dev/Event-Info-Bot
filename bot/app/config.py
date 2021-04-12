@@ -36,6 +36,9 @@ import urllib.request
 import bot.app.secrets as secrets
 from datetime import datetime
 
+# Set version
+__version__ = (1, 0, 0)
+
 # Enable debug level logging. If False, the default logging level will be info
 debug = False
 

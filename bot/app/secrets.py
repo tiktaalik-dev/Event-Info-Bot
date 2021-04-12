@@ -30,6 +30,9 @@ any changes you make in that file will not be affected by upgrading your app.
 """
 
 
+# Set version
+__version__ = (1, 0, 0)
+
 # Set 'secret' variables
 telegram_token = ''
 twitter_access_token = ''

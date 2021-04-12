@@ -27,6 +27,9 @@
 import logging
 import bot.app.config as config
 
+# Set version
+__version__ = (1, 0, 0)
+
 # Start a logger for this module and grab its name
 logger = logging.getLogger(__name__)
 

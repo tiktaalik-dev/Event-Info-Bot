@@ -22,6 +22,10 @@
 
 # NOTE: Remember to rename this file! Google App Engine expects that this file to be named cron.yaml
 
+# Set version
+# __version__ = (1, 0, 0)
+
+# Configure cron jobs to trigger Twitter actions
 cron:
 - description: "Check mentions and reply"
   url: /twitter/actions/[insert here your Twitter Access Token]/reply-mentions

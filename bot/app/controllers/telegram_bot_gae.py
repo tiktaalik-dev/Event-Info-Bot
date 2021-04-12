@@ -38,6 +38,9 @@ from bot.app.launcher import params, set_remote_params
 from telegram.ext import Dispatcher, CommandHandler
 
 
+# Set version
+__version__ = (1, 0, 0)
+
 # Start logger
 logger = logging.getLogger(__name__)
 

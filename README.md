@@ -1,3 +1,7 @@
+<!--- 
+# Set version
+__version__ = (1, 0, 0)
+--->
 # Event Info Bot
 > Bot for instant messaging platforms. On a first stage it only works with Telegram and Twitter platforms.
 It's intended for replying to user queries automatically, providing the date when an event is due as well as 
@@ -54,6 +58,7 @@ in case your language is not yet available.
 
 ## Release History
 
+* 1.0.0 First major release!
 * 0.9.5 Updated README file
 * 0.9.4 Bug fix
 * 0.9.3 Bug fix

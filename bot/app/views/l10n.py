@@ -32,6 +32,9 @@ any changes you make in that file will not be affected by upgrading your app.
 
 import unicodedata
 
+# Set version
+__version__ = (1, 0, 0)
+
 locales = {
     'en-AU': {
         'calculations': {

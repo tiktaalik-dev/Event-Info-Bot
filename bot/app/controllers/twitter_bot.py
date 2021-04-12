@@ -33,6 +33,9 @@ from bot.app.views.l10n import locales, remove_tildes
 import tweepy
 
 
+# Set version
+__version__ = (1, 0, 0)
+
 # Start logger
 logger = logging.getLogger(__name__)
 

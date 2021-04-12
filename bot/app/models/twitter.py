@@ -33,6 +33,9 @@ from datetime import datetime, timedelta, timezone
 from google.cloud import datastore
 import json
 
+# Set version
+__version__ = (1, 0, 0)
+
 # Start logger
 logger = logging.getLogger(__name__)
 

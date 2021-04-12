@@ -34,6 +34,9 @@ from bot.app.controllers.logger import *
 import bot.app.launcher as launcher
 import bot.app.config as config
 
+# Set version
+__version__ = (1, 0, 0)
+
 # Start logger
 logger = logging.getLogger(__name__)
 
