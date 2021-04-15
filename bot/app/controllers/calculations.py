@@ -355,7 +355,7 @@ def get_date(data_request):
         # If the number is greater than 1, return plural noun by default
         return lang['x_days'].format(days), verb_suffix
 
-    def format_months(fraction=False, edge_month=False):
+    def format_months(fraction=False, edge_month=False, discount=False):
         """
         Ask the months_left() function for the number of months left to the event and format its results as a
         human-readable string.
@@ -365,6 +365,8 @@ def get_date(data_request):
         :type fraction: bool
         :param edge_month: Whether the result must be subtracted one month or not
         :type edge_month: bool
+        :param discount: Whether the total amount should be subtracted by 1 (e.g. for the summary)
+        :type discount: bool
         :return: Human-readable information for the days left to the event
         :rtype: str
         """
@@ -375,7 +377,10 @@ def get_date(data_request):
             if edge_month:
                 input_data = 11
             else:
-                input_data = year_fraction_left()
+                if discount:
+                    input_data = year_fraction_left() - 1
+                else:
+                    input_data = year_fraction_left()
 
             months = format_num(input_data)
 
@@ -428,20 +433,26 @@ def get_date(data_request):
         if delta.seconds < 1:
             return None
 
+        # Get the event date (corrected by its timezone)
+        event_date = get_timezone_date()
+
         # Check if event month and current month are the same one, and whether the current day is greater than the event
         # If that happens, we are on the edge between years and the output must be adjusted by subtracting one month
         # and one year. This will ensure displaying a human-friendly string
         now = get_now()
 
-        # Get the event date (corrected by its timezone)
-        event_date = get_timezone_date()
-
-        if (event_date.month == now.month) and (event_date.day < now.day):
+        if (event_date.month == now.month) and (event_date.day > now.day):
             years = format_years(edge_year=True)[0]
-            months = format_months(fraction=True, edge_month=True)[0]
+            # months = format_months(fraction=True, edge_month=True)[0]
         else:
             years = format_years()[0]
-            months = format_months(fraction=True)[0]
+
+        # Check if the months count must be corrected to display the human-readable number needed in a summary
+        # ToDo: This will probable fail if the event date is on the 1st day of a month...
+        if event_date.day != now.day:
+            months = format_months(fraction=True, edge_month=False, discount=True)[0]
+        else:
+            months = format_months(fraction=True, edge_month=False)[0]
 
         # Get the number of years, months and days left
         ymd = {'years': years, 'months': months, 'days': format_days(relative=True)[0]}

@@ -55,8 +55,8 @@ gae_debugger = False
 # Check available timezones with command pytz.country_timezones('us'). Replace with the proper country code
 # Then fill in the desired time zone into the following command argument
 # Please be aware that Google App Engine sets the server clock to use the UTC (+0) time zone, so you should use
-# Europe/London in that case
-server_timezone = pytz.timezone('Europe/London')
+# 'UTC' in that case
+server_timezone = pytz.timezone('UTC')
 
 # Set here the date of the event you want to provide a countdown to. Use the event's local time!
 # Parameters are: (year, month, day, hour, minute, second)
