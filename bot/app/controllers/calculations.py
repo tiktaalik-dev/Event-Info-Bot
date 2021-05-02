@@ -448,11 +448,11 @@ def get_date(data_request):
             years = format_years()[0]
 
         # Check if the months count must be corrected to display the human-readable number needed in a summary
-        # ToDo: This will probable fail if the event date is on the 1st day of a month...
-        if event_date.day != now.day:
-            months = format_months(fraction=True, edge_month=False, discount=True)[0]
+        # ToDo: This will probably fail if the event date is on the 1st day of a month...
+        if event_date.day >= now.day:
+            months = format_months(fraction=True, edge_month=False, discount=False)[0]
         else:
-            months = format_months(fraction=True, edge_month=False)[0]
+            months = format_months(fraction=True, edge_month=False, discount=True)[0]
 
         # Get the number of years, months and days left
         ymd = {'years': years, 'months': months, 'days': format_days(relative=True)[0]}
